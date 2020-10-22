@@ -7,10 +7,6 @@ import javax.swing.*;
 import javax.imageio.ImageIO;
 import java.io.*;
 import java.util.Random;
-/*
-import com.teamdev.jxbrowser.chromium.BrowserFactory;
-import com.teamdev.jxbrowser.chromium.Browser;
-*/
 import java.util.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -24,11 +20,6 @@ class Notifier{
 
 	class DesktopNotifier extends TimerTask{
 		Timer timer;
-		//Browser browser;
-		/*DesktopNotifier(Timer pTimer, Browser pBrowser){
-				this.timer = pTimer;
-				this.browser = pBrowser;
-		}*/
 
 		DesktopNotifier(Timer pTimer){
 				this.timer = pTimer;
@@ -44,7 +35,7 @@ class Notifier{
 			JTextArea jt = new JTextArea("");
 			String toBeDisplayed="";
 			File dir = new File(".");
-			File[] motivationalFiles  = dir.listFiles((d,fname)->(fname.endsWith(".txt") && fname.startsWith("Mot")));
+			File[] motivationalFiles  = dir.listFiles((d,fname)->(fname.endsWith(".txt") && fname.startsWith("'Mot'")));
 			int rnd = new Random().nextInt(motivationalFiles.length);
 			String fName = motivationalFiles[rnd].getName();
 			try{
@@ -59,7 +50,6 @@ class Notifier{
 			}catch(IOException e){}
 			jt.append(toBeDisplayed);
 			jt.setVisible(true);
-			//frame.add(this.browser.getView().getComponent());
 			try{
 				ws = new ImageIcon(ImageIO.read(new File("Mario.jpg")));
 			}
@@ -101,7 +91,6 @@ class Notifier{
 			catch(AWTException e){
 				System.out.println(e);
 			}
-			//Browser browser = BrowserFactory.create();
 
 			Timer timer = new Timer();
 			timer.schedule(new Notifier().new DesktopNotifier(timer), NotifierConstants.INITIAL_DELAY, NotifierConstants.REPITITION_PERIOD);
